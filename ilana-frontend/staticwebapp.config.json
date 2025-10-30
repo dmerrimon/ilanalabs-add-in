@@ -7,7 +7,12 @@
     ".css": "text/css",
     ".html": "text/html",
     ".json": "application/json",
-    ".xml": "text/xml"
+    ".xml": "text/xml",
+    ".png": "image/png",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".svg": "image/svg+xml",
+    ".ico": "image/x-icon"
   },
   "globalHeaders": {
     "Access-Control-Allow-Origin": "*",
