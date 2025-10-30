@@ -1,40 +1,9 @@
-# Ilana Protocol Intelligence - Backend Dependencies
-
-# Core FastAPI framework
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
 pydantic==2.5.0
-
-# HTTP and async support
-httpx==0.25.2
-aiohttp==3.9.1
-aiofiles==23.2.0
-
-# Data processing
-pandas==2.1.4
-numpy==1.25.2
-
-# Configuration and environment
-python-dotenv==1.0.0
-pydantic-settings==2.1.0
-
-# Logging and monitoring
-structlog==23.2.0
-
-# Optional ML dependencies (install separately if needed)
-# torch>=2.0.0
-# transformers>=4.30.0
-# tensorflow>=2.13.0
-# scikit-learn>=1.3.0
-# pinecone-client>=2.2.0
-# faiss-cpu>=1.7.4
-
-# Development dependencies
-pytest==7.4.3
-pytest-asyncio==0.21.1
-black==23.11.0
-flake8==6.1.0
-mypy==1.7.1
-
-# Production deployment
-gunicorn==21.2.0
+python-multipart==0.0.6
+transformers==4.35.0
+torch==2.1.0
+openai==1.3.0
+azure-identity==1.15.0
+azure-keyvault-secrets==4.7.0

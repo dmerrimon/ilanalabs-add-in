@@ -11,13 +11,13 @@
   <DisplayName DefaultValue="Ilana" />
   <Description DefaultValue="AI-powered clinical protocol assistant with Grammarly-style interface for real-time compliance checking." />
 
-  <IconUrl DefaultValue="https://YOUR_AZURE_STATIC_APP_URL/icon-32.png" />
-  <HighResolutionIconUrl DefaultValue="https://YOUR_AZURE_STATIC_APP_URL/icon-80.png" />
+  <IconUrl DefaultValue="https://agreeable-forest-0bbaa4e0f.3.azurestaticapps.net/icon-32.png" />
+  <HighResolutionIconUrl DefaultValue="https://agreeable-forest-0bbaa4e0f.3.azurestaticapps.net/icon-80.png" />
 
   <SupportUrl DefaultValue="https://github.com/YOUR_USERNAME/ilana-frontend" />
   
   <AppDomains>
-    <AppDomain>https://YOUR_BACKEND_URL.onrender.com</AppDomain>
+    <AppDomain>https://ilanalabs-add-in.onrender.com</AppDomain>
   </AppDomains>
   
   <Hosts>
@@ -31,7 +31,7 @@
   </Requirements>
 
   <DefaultSettings>
-    <SourceLocation DefaultValue="https://YOUR_AZURE_STATIC_APP_URL" />
+    <SourceLocation DefaultValue="https://agreeable-forest-0bbaa4e0f.3.azurestaticapps.net" />
   </DefaultSettings>
 
   <Permissions>ReadWriteDocument</Permissions>

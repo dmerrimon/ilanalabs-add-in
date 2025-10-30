@@ -1,5 +1,7 @@
 {
-  "defaultDocument": "taskpane.html",
+  "navigationFallback": {
+    "rewrite": "/taskpane.html"
+  },
   "mimeTypes": {
     ".js": "text/javascript",
     ".css": "text/css",

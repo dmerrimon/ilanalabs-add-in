@@ -118,20 +118,18 @@ function transformBackendResponse(response) {
         throw new Error("Invalid response format");
     }
     
-    // Extract scores (default to 75 if not provided)
+    // Extract scores from the backend response format
     const scores = {
-        compliance: response.compliance_score || response.scores?.compliance || 75,
-        clarity: response.clarity_score || response.scores?.clarity || 75,
-        engagement: response.engagement_score || response.scores?.engagement || 75,
-        delivery: response.delivery_score || response.scores?.delivery || 75
+        compliance: response.compliance_score || 75,
+        clarity: response.clarity_score || 75,
+        engagement: response.engagement_score || 75,
+        delivery: response.delivery_score || 75
     };
     
-    // Extract issues
+    // Extract issues from the backend response
     let issues = [];
     if (response.issues && Array.isArray(response.issues)) {
         issues = response.issues;
-    } else if (response.analysis_results && Array.isArray(response.analysis_results)) {
-        issues = response.analysis_results;
     }
     
     // Ensure minimum number of issues
