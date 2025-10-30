@@ -235,12 +235,15 @@ body {
 .navigation {
     display: flex;
     justify-content: center;
+    align-items: center;
+    width: 100%;
 }
 
 /* Control Buttons */
 .control-button {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
     padding: 12px 24px;
     border: none;
@@ -251,6 +254,8 @@ body {
     transition: all 0.2s ease;
     font-family: inherit;
     text-decoration: none;
+    position: relative;
+    min-width: 140px;
 }
 
 .scan-button {
@@ -315,4 +320,89 @@ body {
 .control-button:focus {
     outline: 2px solid #3b82f6;
     outline-offset: 2px;
+}
+
+/* Loading Animation */
+.loading-spinner {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.spinner {
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top: 2px solid #ffffff;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Button Loading State */
+.control-button.loading .button-text {
+    display: none;
+}
+
+.control-button.loading .loading-spinner {
+    display: inline-flex;
+}
+
+.control-button.loading {
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+/* Error Toast */
+.error-toast {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ef4444;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    font-weight: 500;
+    max-width: 300px;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.error-close {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+    width: 20px;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.error-close:hover {
+    opacity: 0.8;
 }

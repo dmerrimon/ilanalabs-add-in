@@ -283,24 +283,19 @@ function resetProgressBars() {
 // Set loading state
 function setLoadingState(loading) {
     isAnalyzing = loading;
-    const container = document.querySelector('.grammarly-container');
+    const container = document.querySelector('.ilana-container');
     const scanButton = document.querySelector('.scan-button');
     
     if (loading) {
-        container.classList.add('loading');
+        if (container) container.classList.add('loading');
         if (scanButton) {
-            scanButton.textContent = 'Analyzing...';
+            scanButton.classList.add('loading');
             scanButton.disabled = true;
         }
     } else {
-        container.classList.remove('loading');
+        if (container) container.classList.remove('loading');
         if (scanButton) {
-            scanButton.innerHTML = `
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                    <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="white"/>
-                </svg>
-                Scan Document
-            `;
+            scanButton.classList.remove('loading');
             scanButton.disabled = false;
         }
     }
@@ -308,14 +303,38 @@ function setLoadingState(loading) {
 
 // Show error message
 function showError(message) {
+    const errorToast = document.getElementById('error-toast');
+    const errorMessage = document.getElementById('error-message');
+    
+    if (errorToast && errorMessage) {
+        errorMessage.textContent = message;
+        errorToast.style.display = 'flex';
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            hideError();
+        }, 5000);
+    }
+    
+    // Also update issues list
     const issuesList = document.getElementById('issues-list');
-    issuesList.innerHTML = `
-        <div class="no-issues">
-            <p style="color: #ef4444;">${message}</p>
-        </div>
-    `;
+    if (issuesList) {
+        issuesList.innerHTML = `
+            <div class="no-issues">
+                <p style="color: #ef4444;">${message}</p>
+            </div>
+        `;
+    }
     updateIssuesCount(0);
     resetProgressBars();
+}
+
+// Hide error message
+function hideError() {
+    const errorToast = document.getElementById('error-toast');
+    if (errorToast) {
+        errorToast.style.display = 'none';
+    }
 }
 
 // Export for testing
