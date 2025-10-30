@@ -329,6 +329,16 @@ body {
     justify-content: center;
 }
 
+/* Custom WebM Loading Animation */
+.custom-loading-animation {
+    width: 24px;
+    height: 24px;
+    object-fit: cover;
+    border-radius: 4px;
+    opacity: 0.9;
+}
+
+/* Fallback CSS Spinner */
 .spinner {
     width: 16px;
     height: 16px;

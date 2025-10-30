@@ -90,7 +90,11 @@
                 <button class="control-button ghost-button scan-button" onclick="scanDocument()">
                     <span class="button-text">Scan Document</span>
                     <div class="loading-spinner" style="display: none;">
-                        <div class="spinner"></div>
+                        <video class="custom-loading-animation" autoplay loop muted playsinline>
+                            <source src="assets/loading-animation.webm" type="video/webm">
+                            <!-- Fallback spinner for unsupported browsers -->
+                            <div class="spinner"></div>
+                        </video>
                     </div>
                 </button>
             </div>
