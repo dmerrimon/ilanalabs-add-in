@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
+    
+    <title>Ilana</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="style.css?v=5.0" rel="stylesheet" type="text/css" />
+    
+    <script src="https://appsforoffice.microsoft.com/lib/1/hosted/office.js"></script>
+</head>
+<body>
+    <!-- Main container -->
+    <div class="ilana-container">
+        <!-- Header Section -->
+        <div class="ilana-header">
+            <div class="header-content">
+                <h1 class="app-title">Ilana</h1>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Progress Overview -->
+            <div class="outcomes-grid">
+                <div class="outcome-card compliance">
+                    <div class="outcome-header">
+                        <span class="outcome-label">Compliance</span>
+                        <span class="outcome-score" id="compliance-score">--</span>
+                    </div>
+                    <div class="compliance-progress progress-bar">
+                        <div class="progress-fill" id="compliance-progress"></div>
+                    </div>
+                </div>
+                
+                <div class="outcome-card clarity">
+                    <div class="outcome-header">
+                        <span class="outcome-label">Clarity</span>
+                        <span class="outcome-score" id="clarity-score">--</span>
+                    </div>
+                    <div class="clarity-progress progress-bar">
+                        <div class="progress-fill" id="clarity-progress"></div>
+                    </div>
+                </div>
+                
+                <div class="outcome-card engagement">
+                    <div class="outcome-header">
+                        <span class="outcome-label">Engagement</span>
+                        <span class="outcome-score" id="engagement-score">--</span>
+                    </div>
+                    <div class="engagement-progress progress-bar">
+                        <div class="progress-fill" id="engagement-progress"></div>
+                    </div>
+                </div>
+                
+                <div class="outcome-card delivery">
+                    <div class="outcome-header">
+                        <span class="outcome-label">Delivery</span>
+                        <span class="outcome-score" id="delivery-score">--</span>
+                    </div>
+                    <div class="delivery-progress progress-bar">
+                        <div class="progress-fill" id="delivery-progress"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Issues Section -->
+            <div class="ilana-issues">
+                <div class="issues-header">
+                    <h3>Protocol Analysis</h3>
+                    <span class="issues-count" id="issues-count">0 issues</span>
+                </div>
+                <div class="issues-list" id="issues-list">
+                    <div class="no-issues">
+                        <p>Click "Scan Document" to analyze your protocol</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <div class="outcomes-navigation-wrapper">
+            <div class="outcomes-navigation">
+                <button class="control-button ghost-button scan-button" onclick="scanDocument()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+                        <path d="M21 21L16.514 16.506L21 21ZM19 10.5C19 15.194 15.194 19 10.5 19C5.806 19 2 15.194 2 10.5C2 5.806 5.806 2 10.5 2C15.194 2 19 5.806 19 10.5Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="white"/>
+                    </svg>
+                    Scan Document
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="ilana.js?v=5.0"></script>
+</body>
+</html>
