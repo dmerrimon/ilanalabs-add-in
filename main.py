@@ -157,6 +157,15 @@ app = FastAPI(
     redoc_url="/redoc"
 )
 
+# Configure CORS (moved outside startup)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # In production, specify your domains
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allow_headers=["*"],
+)
+
 @app.on_event("startup")
 async def startup_event():
     """Initialize services on startup"""
@@ -165,32 +174,48 @@ async def startup_event():
     logger.info("🚀 Starting Ilana Protocol Intelligence API")
     
     try:
-        # Load configuration
-        app_config = get_config()
-        logger.info(f"✅ Configuration loaded for environment: {app_config.environment}")
+        # Load configuration with fallback for production
+        try:
+            app_config = get_config()
+            logger.info(f"✅ Configuration loaded for environment: {app_config.environment}")
+        except Exception as config_error:
+            logger.warning(f"Config loading failed: {config_error}, using production defaults")
+            # Create minimal production config
+            from dataclasses import dataclass
+            @dataclass
+            class ProductionConfig:
+                environment: str = "production"
+                enable_continuous_learning: bool = False
+                enable_azure_openai: bool = False  
+                enable_pinecone_integration: bool = False
+                cors_origins: str = "*"
+            app_config = ProductionConfig()
         
-        # Initialize Real AI Service (Azure OpenAI + Pinecone)
-        real_ai_service = create_real_ai_service(app_config)
-        logger.info("✅ Real AI service initialized")
+        # Initialize Real AI Service (Azure OpenAI + Pinecone) - optional in production
+        try:
+            if hasattr(app_config, 'enable_azure_openai') and app_config.enable_azure_openai:
+                real_ai_service = create_real_ai_service(app_config)
+                logger.info("✅ Real AI service initialized")
+            else:
+                logger.info("⚠️ Real AI service disabled - using fallback analysis")
+                real_ai_service = None
+        except Exception as ai_error:
+            logger.warning(f"Real AI service failed to initialize: {ai_error}, using fallback")
+            real_ai_service = None
         
-        # Initialize ML components
-        ml_analyzer = MultiModalProtocolAnalyzer()
-        logger.info("✅ Multi-modal analyzer initialized")
+        # Initialize ML components with fallback
+        try:
+            ml_analyzer = MultiModalProtocolAnalyzer()
+            logger.info("✅ Multi-modal analyzer initialized")
+        except Exception as ml_error:
+            logger.warning(f"ML analyzer failed to initialize: {ml_error}, using fallback")
+            ml_analyzer = None
         
         # Initialize learning pipeline
         learning_pipeline = ContinuousLearningPipeline()
         if app_config.enable_continuous_learning:
             await learning_pipeline.start_continuous_learning()
             logger.info("✅ Continuous learning pipeline started")
-        
-        # Configure CORS
-        app.add_middleware(
-            CORSMiddleware,
-            allow_origins=app_config.cors_origins.split(",") if app_config.cors_origins != "*" else ["*"],
-            allow_credentials=True,
-            allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-            allow_headers=["*"],
-        )
         
         logger.info("🎉 Ilana API startup completed successfully")
         
@@ -259,7 +284,6 @@ async def health_check(
 async def analyze_protocol(
     request: ProtocolAnalysisRequest,
     background_tasks: BackgroundTasks,
-    analyzer: MultiModalProtocolAnalyzer = Depends(get_analyzer_dependency),
     config: IlanaConfig = Depends(get_config_dependency)
 ):
     """
