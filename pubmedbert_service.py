@@ -342,5 +342,8 @@ def main():
     # Output JSON result
     print(json.dumps(result, indent=2))
 
+# Alias for backward compatibility
+PubmedBERTService = PubMedBERTAnalyzer
+
 if __name__ == "__main__":
     main()
