@@ -30,6 +30,9 @@ from reinforcement_learning import ProtocolReinforcementLearner
 from real_ai_service import create_real_ai_service, RealAIService
 
 # Configure logging
+import os
+os.makedirs('logs', exist_ok=True)
+
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
