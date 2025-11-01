@@ -3,8 +3,8 @@ services:
     name: ilana-backend
     env: python
     plan: starter
-    buildCommand: pip install -r requirements.txt && pip install "numpy<2"
-    startCommand: cp -r config/* api/ && cp -r ml-models/* api/ && cd api && mkdir -p logs && python main.py
+    buildCommand: pip install -r requirements.txt && pip uninstall -y numpy && pip install "numpy==1.24.3"
+    startCommand: cp -r config/* api/ && cp -r ml-models/* api/ && cd api && mkdir -p logs && touch logs/ilana_api.log && python main.py
     envVars:
       - key: ENVIRONMENT
         value: production
